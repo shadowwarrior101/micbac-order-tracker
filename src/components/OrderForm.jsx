@@ -24,7 +24,6 @@ const INITIAL = {
   item: '',
   quantity: '',
   customer: '',
-  order_number: '',
   po_number: '',
   destination_country: '',
   factory: '',
@@ -45,7 +44,6 @@ function toFormState(order) {
     item: order.item ?? '',
     quantity: order.quantity != null ? String(order.quantity) : '',
     customer: order.customer ?? '',
-    order_number: order.order_number ?? '',
     po_number: order.po_number ?? '',
     destination_country: order.destination_country ?? '',
     factory: order.factory ?? '',
@@ -95,7 +93,6 @@ export default function OrderForm({ user, order, onClose, onSuccess }) {
       quantity: parseInt(form.quantity, 10),
       order_value: form.order_value ? parseFloat(form.order_value) : null,
       selling_price: form.selling_price ? parseFloat(form.selling_price) : null,
-      order_number: form.order_number.trim() || null,
       po_number: form.po_number || null,
       destination_country: normalizeCustomerName(form.destination_country) || null,
       factory: normalizeCustomerName(form.factory) || null,
@@ -179,15 +176,16 @@ export default function OrderForm({ user, order, onClose, onSuccess }) {
               />
             </div>
 
+            {/* Assigned by the database on insert (orders_assign_order_number trigger) — never sent. */}
             <div className="form-group">
               <label htmlFor="order_number">Order Number</label>
               <input
                 id="order_number"
-                name="order_number"
                 type="text"
-                value={form.order_number}
-                onChange={handleChange}
-                placeholder="e.g. MB-2026-014"
+                value={order?.order_number ?? ''}
+                placeholder="Assigned automatically on save"
+                readOnly
+                disabled
               />
             </div>
 
