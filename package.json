@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "homepage": "https://anupaminnit.github.io/micbac-order-tracker",
+  "homepage": "https://shadowwarrior101.github.io/micbac-order-tracker",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
